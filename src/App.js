@@ -5,6 +5,7 @@ import Home from "./components/home/home";
 import Usage from "./components/forms/usage";
 import Budget from "./components/forms/budget";
 import Performance from "./components/forms/performance";
+import Validate from "./components/forms/validate";
 import { UsageProvider } from "./components/forms/usage-context";
 import "./App.css";
 
@@ -43,6 +44,7 @@ function Main() {
           <Route path="/usage" element={<Usage />} />
           <Route path="/budget" element={<Budget />} />
           <Route path="/performance" element={<Performance />} />
+          <Route path="/validate" element={<Validate />} />
         </Routes>
       </div>
     </div>

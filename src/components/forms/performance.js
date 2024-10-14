@@ -42,7 +42,7 @@ export default function Performance() {
   };
 
   const handleNext = () => {
-    navigate("/summary"); // Navigate to the summary page
+    navigate("/validate"); // Navigate to the summary page
   };
 
   return (
