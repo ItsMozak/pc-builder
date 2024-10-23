@@ -8,6 +8,7 @@ import Performance from "./components/forms/performance";
 import Validate from "./components/forms/validate";
 import { UsageProvider } from "./components/forms/usage-context";
 import "./App.css";
+import Result from "./components/forms/result";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function Main() {
   useEffect(() => {
     // Start the animation
     setAnimate(true);
-    
+
     // Reset the animation after it has completed
     const timer = setTimeout(() => {
       setAnimate(false);
@@ -45,6 +46,7 @@ function Main() {
           <Route path="/budget" element={<Budget />} />
           <Route path="/performance" element={<Performance />} />
           <Route path="/validate" element={<Validate />} />
+          <Route path="/result" element={<Result />} />
         </Routes>
       </div>
     </div>

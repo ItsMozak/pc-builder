@@ -19,6 +19,8 @@ export const UsageProvider = ({ children }) => {
   const [caseSize, setCaseSize] = useState("");
   const [ram, setRam] = useState("");
 
+  const [result, setResult] = useState({})
+
   return (
     <UsageContext.Provider
       value={{
@@ -48,6 +50,8 @@ export const UsageProvider = ({ children }) => {
         setCaseSize,
         ram,
         setRam,
+        result,
+        setResult
       }}
     >
       {children}

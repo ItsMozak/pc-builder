@@ -1,14 +1,14 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "apikey",
+  apiKey: "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",
   dangerouslyAllowBrowser: true
 });
 
 export default async function sendPromptToGPT(prompt) {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-3",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -23,7 +23,6 @@ export default async function sendPromptToGPT(prompt) {
 
     // Get the AI's response
     const aiResponse = response.choices[0].message.content;
-    console.log(aiResponse);
     return aiResponse;
   } catch (error) {
     console.error("Error in sending prompt to GPT:", error);

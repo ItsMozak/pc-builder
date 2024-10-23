@@ -15,31 +15,32 @@ proxy_port = '8011'
 proxy_url = f'http://{proxy_host}:{proxy_port}'
 
 async def generate_fake_session():
-    browser = await launch(args=[
+    browser = await launch(
+        handleSIGINT=False,
+        handleSIGTERM=False,
+        handleSIGHUP=False,
+        args=[
         f'--proxy-server={proxy_url}',
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-blink-features=AutomationControlled',
     ])
-    page = await browser.newPage()
-
-    # Authenticate to the proxy (if using one)
-    await page.authenticate({
-        'username': proxy_username,
-        'password': proxy_password
-    })
-
-    # Apply stealth techniques to make the browser less detectable
-    await stealth(page)
+    page = await setup_page(browser)
     #Use the products link to retreive the xsessionid and the xcsrftoken
-    await page.goto('https://ca.pcpartpicker.com/products/cpu/', {'waitUntil': 'networkidle2'})
+    max_retries = 5
+    retry_count = 0
+    while retry_count < max_retries:
+        await page.goto('https://ca.pcpartpicker.com/products/cpu/', {'waitUntil': 'networkidle2'},  timeout=0)
 
-    cookies = await page.cookies()
-    xsessionid = next((cookie['value'] for cookie in cookies if cookie['name'] == 'xsessionid'), None)
-    xcsrftoken = next((cookie['value'] for cookie in cookies if cookie['name'] == 'xcsrftoken'), None)
-    print(xsessionid)
-    print(xcsrftoken)
-    return xsessionid, xcsrftoken
+        cookies = await page.cookies()
+        xsessionid = next((cookie['value'] for cookie in cookies if cookie['name'] == 'xsessionid'), None)
+        xcsrftoken = next((cookie['value'] for cookie in cookies if cookie['name'] == 'xcsrftoken'), None)
+        if not (xsessionid == None):
+            print(xsessionid)
+            print(xcsrftoken)
+            return xsessionid, xcsrftoken
+        print("No xsessionid retrying....")
+        await asyncio.sleep(2)
 
 async def add_part(type_part, tag, xsessionid, xcsrftoken):
   
@@ -90,20 +91,57 @@ async def add_part(type_part, tag, xsessionid, xcsrftoken):
                 break
         except requests.RequestException as e:
             print(f"An error occurred while making the request: {e}")
-    
-async def add_all_parts():
+
+async def add_all_parts(memory_tag, cpu_tag, motherboard_tag, video_card_tag, storage_tag, power_supply_tag, case_tag, cpu_cooler_tag):
     xsessionid, xcsrftoken = await generate_fake_session()
-    await add_part('cpu', '3hyH99', xsessionid, xcsrftoken)
-    await asyncio.sleep(5)  # Delay for 2 seconds
-    await add_part('video-card', 'pD8bt6', xsessionid, xcsrftoken)
-    await asyncio.sleep(5)  # Delay for 2 seconds
-    await add_part('memory', 'JkfxFT', xsessionid, xcsrftoken)
-    await asyncio.sleep(5)  # Delay for 2 seconds
-    await add_part('motherboard', 'mP88TW', xsessionid, xcsrftoken)
-    await generate_pcpartpicker_link(xsessionid)
+    # Create an empty list to hold tasks
+    tasks = []
+
+    # Define all parts and tags
+    parts = [
+        ('cpu', cpu_tag),
+        ('video-card', video_card_tag),
+        ('memory', memory_tag),
+        ('motherboard', motherboard_tag),
+        ('storage', storage_tag),
+        ('power-supply', power_supply_tag),
+        ('case', case_tag),
+        ('cpu-cooler', cpu_cooler_tag),
+    ]
+
+    # Create tasks for each part and append them to the tasks list
+    for part_name, part_tag in parts:
+        task = asyncio.create_task(add_part(part_name, part_tag, xsessionid, xcsrftoken))
+        tasks.append(task)
+
+    # Use asyncio.gather to run all tasks concurrently
+    await asyncio.gather(*tasks)
+
+    # #TO CHANGE
+    # await add_part('cpu', cpu_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('video-card', video_card_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('memory', memory_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('motherboard', motherboard_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('storage', storage_tag, xsessionid, xcsrftoken)  
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('power-supply', power_supply_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('case', case_tag, xsessionid, xcsrftoken)
+    # await asyncio.sleep(5)  # Delay for 2 seconds
+    # await add_part('cpu-cooler', cpu_cooler_tag, xsessionid, xcsrftoken)
+    
+    return await generate_pcpartpicker_link(xsessionid)
 
 async def generate_pcpartpicker_link(xsessionid):
-    browser = await launch(args=[
+    browser = await launch(
+        handleSIGINT=False,
+        handleSIGTERM=False,
+        handleSIGHUP=False,
+        args=[
         f'--proxy-server={proxy_url}',
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -127,7 +165,6 @@ async def generate_pcpartpicker_link(xsessionid):
     
     await page.setCookie(*cookies)
     await page.goto(url, {'waitUntil': 'networkidle2'})
-
     
     # await page.screenshot({'path': 'screenshot.png'})
 
@@ -143,9 +180,9 @@ async def generate_pcpartpicker_link(xsessionid):
         }
         return null;  // Return null if no match is found
     }''')
-    print(input_value)
+    return input_value
 
     
-# asyncio.get_event_loop().run_until_complete(generate_pcpartpicker_link())
-asyncio.get_event_loop().run_until_complete(add_all_parts())
+# asyncio.get_event_loop().run_until_complete(add_all_parts())
+# asyncio.get_event_loop().run_until_complete(generate_fake_session())
     

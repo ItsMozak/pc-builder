@@ -2,7 +2,8 @@ import { useUsage } from "./usage-context"; // Import the useUsage hook
 import { useNavigate } from "react-router-dom";
 import sendPromptToGpt from "../../services/ai-service";
 import generatePCBuildPrompt from "../prompt/prompt";
-
+import axios from 'axios';
+import { json } from "react-router-dom";
 export default function Validate() {
   const navigate = useNavigate();
 
@@ -19,11 +20,28 @@ export default function Validate() {
     storageType, // Type of storage (e.g., SSD, HDD)
     storageCapacity, // Storage capacity (e.g., 1TB, 2TB, etc.)
     caseSize, // Preferred case size (e.g., Full Tower, Mid Tower)
-    ram, // Amount of RAM (e.g., 16GB, 32GB)
+    ram,
+    setResult // Amount of RAM (e.g., 16GB, 32GB)
   } = useUsage();
 
+  const postData = async (payload) => {
+    const jsonContent = payload.replace(/^```(?:json)?\n/, '').replace(/\n```$/, '');
+    let data = JSON.stringify(jsonContent);
+    try {
+      const response = await axios.post('http://localhost:5000/api/data/getLink', data, {
+        headers: {
+          'Content-Type': 'application/json' // Set the correct header
+        }
+      });
+      setResult(response.data); // Store the response data in state
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
+  };
+
   const handleConfirm = async () => {
-    const prompt = generatePCBuildPrompt(
+
+    const prompt = generatePCBuildPrompt({
       usageOptions,
       resolutionOption,
       softwareOrGames,
@@ -37,10 +55,14 @@ export default function Validate() {
       storageCapacity,
       caseSize,
       ram
-    );
+    });
     try {
+      console.log(prompt)
       const response = await sendPromptToGpt(prompt);
-      console.log(response);
+      // console.log(response)
+      await postData(response);
+      // navigate("/result");
+      // console.log(response);
     } catch (error) {
       console.error("Failed to get response from GPT:", error);
     }

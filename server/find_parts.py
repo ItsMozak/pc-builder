@@ -45,6 +45,7 @@ def find_part(html_content, part_name):
     
     found = False
     
+    list_of_parts = []
     # Iterate over each entry
     for entry_html in entries:
         # Skip empty entries
@@ -68,10 +69,13 @@ def find_part(html_content, part_name):
                 data_product_tag = price_tag.find('button', class_='td__add')['data-product-tag']
                 print(f"Product Name: {product_name}")
                 print(f"Data Product Tag: {data_product_tag}")
-                return data_product_tag
+                list_of_parts.append(data_product_tag)
     
-    if not found:
+    if len(list_of_parts):
+        return list_of_parts
+    else:
         print("The part name does not match any entry.")
 
-# html_content = readProductFile('data/video_card_products.html')
-# find_part(html_content, 'gigabyte windforce 4070 ti super')
+
+# html_content = readProductFile('data/cpu_products.html')
+# find_part(html_content, 'Intel Core i9 13900K')

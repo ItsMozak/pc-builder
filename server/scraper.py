@@ -109,7 +109,11 @@ async def main():
         'https://ca.pcpartpicker.com/products/cpu/',
         'https://ca.pcpartpicker.com/products/video-card/',
         'https://ca.pcpartpicker.com/products/motherboard/',
-        'https://ca.pcpartpicker.com/products/memory/'
+        'https://ca.pcpartpicker.com/products/memory/',
+        'https://ca.pcpartpicker.com/products/power-supply/',
+        'https://ca.pcpartpicker.com/products/cpu-cooler/',
+        'https://ca.pcpartpicker.com/products/internal-hard-drive/',
+        'https://ca.pcpartpicker.com/products/case/'
     ]
 
     # Corresponding output filenames
@@ -117,7 +121,11 @@ async def main():
         'cpu_products.html',
         'video_card_products.html',
         'motherboard_products.html',
-        'memory_products.html'
+        'memory_products.html',
+        'power-supply_products.html',
+        'cpu-cooler_products.html',
+        'internal-hard-drive_products.html',
+        'case_products.html'
     ]
 
     # Create scraping tasks
