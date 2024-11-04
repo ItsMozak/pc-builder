@@ -18,11 +18,11 @@ export default async function sendPromptToGPT(prompt) {
           role: "user",
           content: prompt,
         },
-      ],
+      ]
     });
 
     // Get the AI's response
-    const aiResponse = response.choices[0].message.content;
+    const aiResponse = JSON.parse(response.choices[0].message.content);
     return aiResponse;
   } catch (error) {
     console.error("Error in sending prompt to GPT:", error);
