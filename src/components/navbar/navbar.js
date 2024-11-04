@@ -5,7 +5,7 @@ export default function Navbar() {
                 <div className="relative flex h-16 justify-between">
                     <div className="flex flex-1 items-stretch justify-start">
                         <a className="flex flex-shrink-0 items-center" href="/">
-                            <img alt="Moven PC builder logo" className="block h-12 w-auto mr-4" src="/images/Moven-logo-badge.png" ></img>
+                            <img alt="Moven PC builder logo" className="block h-12 w-auto mr-4" src="/pc-builder/images/Moven-logo-badge.png" ></img>
                             <span className='hidden md:block font-bold text-lg'>PC Builder</span>
                         </a>
                     </div>
