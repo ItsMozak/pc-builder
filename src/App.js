@@ -12,7 +12,7 @@ import Result from "./components/forms/result";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pc-builder">
       <UsageProvider>
         <Main />
       </UsageProvider>
