@@ -24,20 +24,6 @@ export default function Validate() {
     setResult // Amount of RAM (e.g., 16GB, 32GB)
   } = useUsage();
 
-  const postData = async (payload) => {
-    const jsonContent = payload.replace(/^```(?:json)?\n/, '').replace(/\n```$/, '');
-    let data = JSON.stringify(jsonContent);
-    try {
-      const response = await axios.post('http://localhost:5000/api/data/getLink', data, {
-        headers: {
-          'Content-Type': 'application/json' // Set the correct header
-        }
-      });
-      setResult(response.data); // Store the response data in state
-    } catch (error) {
-      console.error('There was an error!', error);
-    }
-  };
 
   const handleConfirm = async () => {
 
@@ -59,10 +45,8 @@ export default function Validate() {
     try {
       console.log(prompt)
       const response = await sendPromptToGpt(prompt);
-      // console.log(response)
-      await postData(response);
-      // navigate("/result");
-      // console.log(response);
+      setResult(response)
+      navigate("/result");
     } catch (error) {
       console.error("Failed to get response from GPT:", error);
     }
