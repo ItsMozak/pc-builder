@@ -1,9 +1,6 @@
-import { useUsage } from "./usage-context"; // Import the useUsage hook
 import { useNavigate } from "react-router-dom";
-import sendPromptToGpt from "../../services/ai-service";
 import generatePCBuildPrompt from "../prompt/prompt";
-import axios from 'axios';
-import { json } from "react-router-dom";
+import { useUsage } from "./usage-context"; // Import the useUsage hook
 export default function Validate() {
   const navigate = useNavigate();
 
@@ -44,7 +41,19 @@ export default function Validate() {
     });
     try {
       console.log(prompt)
-      const response = await sendPromptToGpt(prompt);
+      // const response = await sendPromptToGpt(prompt);
+      const response =   {
+        "cpu": "AMD Ryzen 9 7950X3D",
+        "motherboard": "Gigabyte B650 AORUS ELITE AX",
+        "memory": "Corsair Vengeance RGB 32 GB (2 x 16 GB) DDR5-6000",
+        "videocard": "Gigabyte WINDFORCE OC GeForce RTX 4070 SUPER",
+        "storage": "Samsung 990 Pro 4 TB",
+        "power-supply": "Corsair RM1000x (2021)",
+        "cpu-cooler": "NZXT Kraken Elite 360 RGB",
+        "case": "Lian Li O11 Vision",
+        "link": "https://ca.pcpartpicker.com/list/dQGxFZ",
+        "price": "$2939.38"
+      }
       setResult(response)
       navigate("/result");
     } catch (error) {

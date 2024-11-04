@@ -1,6 +1,4 @@
-import { useNavigate } from "react-router-dom";
 import { useUsage } from "./usage-context"; // Import the custom hook
-import { useEffect, useState } from "react";
 
 export default function Result() {
 
