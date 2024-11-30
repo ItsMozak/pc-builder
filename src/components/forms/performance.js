@@ -2,16 +2,16 @@ import { useNavigate } from "react-router-dom";
 import { useUsage } from "./usage-context";
 
 // Define the option arrays as constants
-const priorityOptions = [
-  "CPU",
-  "GPU",
-  "Storage",
-  "RAM",
-  "Motherboard",
-  "Cooling",
-  "Power Supply",
-  "No Preference",
-];
+// const priorityOptions = [
+//   "CPU",
+//   "GPU",
+//   "Storage",
+//   "RAM",
+//   "Motherboard",
+//   "Cooling",
+//   "Power Supply",
+//   "No Preference",
+// ];
 const storageTypeOptions = ["SSD (Faster)", "HDD (More capacity)"];
 const storageCapacityOptions = ["256GB", "512GB", "1TB", "2TB"];
 const caseSizeOptions = ["Full Tower", "Mid Tower", "Mini Tower", "ITX"];
@@ -20,7 +20,7 @@ const ramOptions = ["8GB", "16GB", "32GB", "64GB"];
 export default function Performance() {
   const navigate = useNavigate();
   const {
-    priorities,
+    // priorities,
     setPriorities,
     storageType,
     setStorageType,
@@ -33,13 +33,13 @@ export default function Performance() {
   } = useUsage(); // Use the context
 
   // Handle selecting priorities (multi-select using chips)
-  const handlePriorityClick = (priority) => {
-    setPriorities((prev) =>
-      prev.includes(priority)
-        ? prev.filter((item) => item !== priority)
-        : [...prev, priority]
-    );
-  };
+  // const handlePriorityClick = (priority) => {
+  //   setPriorities((prev) =>
+  //     prev.includes(priority)
+  //       ? prev.filter((item) => item !== priority)
+  //       : [...prev, priority]
+  //   );
+  // };
 
   const handleNext = () => {
     navigate("/validate"); // Navigate to the summary page

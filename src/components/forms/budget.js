@@ -3,8 +3,8 @@ import { useUsage } from "./usage-context";
 
 const cpuOptions = ["Intel", "AMD", "No Preference"];
 const gpuOptions = ["NVIDIA", "AMD", "No Preference"];
-const wifiOptions = ["Yes", "No", "Doesn't matter"];
-const rgbOptions = ["Yes", "No", "Doesn't matter"];
+// const wifiOptions = ["Yes", "No", "Doesn't matter"];
+// const rgbOptions = ["Yes", "No", "Doesn't matter"];
 
 export default function BudgetAndPreferences() {
   const navigate = useNavigate();
@@ -18,9 +18,9 @@ export default function BudgetAndPreferences() {
     gpuPreference,
     setGpuPreference,
     wifiNeeded,
-    setWifiNeeded,
+    // setWifiNeeded,
     rgbLighting,
-    setRgbLighting,
+    // setRgbLighting,
   } = useUsage();
 
   const handleNext = () => {

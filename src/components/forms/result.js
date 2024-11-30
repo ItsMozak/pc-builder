@@ -29,7 +29,7 @@ export default function Result() {
                 <p className="text-white"> <span className="font-bold">Storage:</span> {result.storage}</p>
                 <p className="text-white"> <span className="font-bold">Cooler:</span> {result['cpu-cooler']}</p>
                 <p className="text-white"> <span className="font-bold">Power supply:</span> {result['power-supply']}</p>
-                <p className="text-white"> <span className="font-bold">Pcpartpicker link:</span> <a className="underline text-blue-500" target="_blank" href={result.link}>{result.link}</a></p>
+                <p className="text-white"> <span className="font-bold">Pcpartpicker link:</span> <a className="underline text-blue-500" target="_blank" rel="noreferrer" href={result.link}>{result.link}</a></p>
             {/* Navigation Buttons */}
         <div className="flex justify-center mt-10">
           <button
