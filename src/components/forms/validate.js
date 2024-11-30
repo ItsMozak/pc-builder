@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import generatePCBuildPrompt from "../prompt/prompt";
+import sendPromptToGpt from "../../services/ai-service"
 import { useUsage } from "./usage-context"; // Import the useUsage hook
 export default function Validate() {
   const navigate = useNavigate();
@@ -18,12 +19,10 @@ export default function Validate() {
     storageCapacity, // Storage capacity (e.g., 1TB, 2TB, etc.)
     caseSize, // Preferred case size (e.g., Full Tower, Mid Tower)
     ram,
-    setResult // Amount of RAM (e.g., 16GB, 32GB)
+    setResult, // Amount of RAM (e.g., 16GB, 32GB)
   } = useUsage();
 
-
   const handleConfirm = async () => {
-
     const prompt = generatePCBuildPrompt({
       usageOptions,
       resolutionOption,
@@ -37,24 +36,24 @@ export default function Validate() {
       storageType,
       storageCapacity,
       caseSize,
-      ram
+      ram,
     });
     try {
-      console.log(prompt)
-      // const response = await sendPromptToGpt(prompt);
-      const response =   {
-        "cpu": "AMD Ryzen 9 7950X3D",
-        "motherboard": "Gigabyte B650 AORUS ELITE AX",
-        "memory": "Corsair Vengeance RGB 32 GB (2 x 16 GB) DDR5-6000",
-        "videocard": "Gigabyte WINDFORCE OC GeForce RTX 4070 SUPER",
-        "storage": "Samsung 990 Pro 4 TB",
-        "power-supply": "Corsair RM1000x (2021)",
-        "cpu-cooler": "NZXT Kraken Elite 360 RGB",
-        "case": "Lian Li O11 Vision",
-        "link": "https://ca.pcpartpicker.com/list/dQGxFZ",
-        "price": "$2939.38"
-      }
-      setResult(response)
+      console.log(prompt);
+      const response = await sendPromptToGpt(prompt);
+      // const response = {
+      //   cpu: "AMD Ryzen 9 7950X3D",
+      //   motherboard: "Gigabyte B650 AORUS ELITE AX",
+      //   memory: "Corsair Vengeance RGB 32 GB (2 x 16 GB) DDR5-6000",
+      //   videocard: "Gigabyte WINDFORCE OC GeForce RTX 4070 SUPER",
+      //   storage: "Samsung 990 Pro 4 TB",
+      //   "power-supply": "Corsair RM1000x (2021)",
+      //   "cpu-cooler": "NZXT Kraken Elite 360 RGB",
+      //   case: "Lian Li O11 Vision",
+      //   link: "https://ca.pcpartpicker.com/list/dQGxFZ",
+      //   price: "$2939.38",
+      // };
+      setResult(response);
       navigate("/result");
     } catch (error) {
       console.error("Failed to get response from GPT:", error);
@@ -63,7 +62,7 @@ export default function Validate() {
 
   return (
     <section className="flex items-center justify-center min-h-screen pt-16">
-      <div className="relative items-center w-1/2 max-w-7xl mx-auto px-5 py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2 border-white">
+      <div className="relative items-center md:w-1/2 sm:max-w-7xl mx-6 lg:mx-auto my-8 px-5 py-8 sm:py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
         <h1 className="text-3xl font-bold mb-6 text-white">Summary</h1>
 
         <div className="space-y-6 text-white">
@@ -117,16 +116,16 @@ export default function Validate() {
             </div>
 
             {/* WiFi */}
-            <div className="mb-2">
+            {/* <div className="mb-2">
               <h3 className="text-lg font-semibold">WiFi Needed?</h3>
               <p>{wifiNeeded ? "Yes" : "No"}</p>
-            </div>
+            </div> */}
 
             {/* RGB Lighting */}
-            <div>
+            {/* <div>
               <h3 className="text-lg font-semibold">RGB Lighting</h3>
               <p>{rgbLighting ? "Yes" : "No"}</p>
-            </div>
+            </div> */}
           </div>
 
           {/* Performance Section */}
@@ -134,14 +133,14 @@ export default function Validate() {
             <h2 className="text-2xl font-semibold mb-4">Performance</h2>
 
             {/* Performance Priorities */}
-            <div className="mb-2">
+            {/* <div className="mb-2">
               <h3 className="text-lg font-semibold">Priorities</h3>
               <p>
                 {priorities?.length > 0
                   ? priorities.join(", ")
                   : "No priorities specified"}
               </p>
-            </div>
+            </div> */}
 
             {/* Storage Type */}
             <div className="mb-2">
@@ -170,7 +169,7 @@ export default function Validate() {
         </div>
 
         {/* Navigation buttons */}
-        <div className="mt-8 flex justify-end space-x-4">
+        <div className="mt-8 flex justify-between space-x-4">
           <button
             onClick={() => navigate(-1)}
             className="px-6 py-3 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-500"

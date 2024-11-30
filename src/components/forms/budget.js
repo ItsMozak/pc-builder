@@ -36,7 +36,7 @@ export default function BudgetAndPreferences() {
 
   return (
     <section className="flex items-center justify-center min-h-screen pt-16">
-      <div className="relative items-center w-1/2 px-5 py-16 mx-auto md:px-12 lg:px-16 max-w-7xl bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
+      <div className="relative items-center sm:max-w-7xl mx-6 lg:mx-auto px-5 py-8 sm:py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
         <h1 className="text-3xl font-bold mb-6 text-white">
           Step 2: Budget and Preferences
         </h1>
@@ -105,7 +105,7 @@ export default function BudgetAndPreferences() {
         </div>
 
         {/* Wi-Fi Connectivity */}
-        <h2 className="text-lg font-semibold mb-2 text-white">
+        {/* <h2 className="text-lg font-semibold mb-2 text-white">
           Do you need Wi-Fi connectivity built into the motherboard?
         </h2>
         <div className="flex flex-wrap gap-2 mb-6">
@@ -126,10 +126,10 @@ export default function BudgetAndPreferences() {
               {option}
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* RGB Lighting */}
-        <h2 className="text-lg font-semibold mb-2 text-white">
+        {/* <h2 className="text-lg font-semibold mb-2 text-white">
           Do you want RGB lighting?
         </h2>
         <div className="flex flex-wrap gap-2 mb-6">
@@ -150,7 +150,7 @@ export default function BudgetAndPreferences() {
               {option}
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-10">

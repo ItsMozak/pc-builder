@@ -12,7 +12,7 @@ const priorityOptions = [
   "Power Supply",
   "No Preference",
 ];
-const storageTypeOptions = ["SSD (Faster)", "HDD (More capacity)", "Both"];
+const storageTypeOptions = ["SSD (Faster)", "HDD (More capacity)"];
 const storageCapacityOptions = ["256GB", "512GB", "1TB", "2TB"];
 const caseSizeOptions = ["Full Tower", "Mid Tower", "Mini Tower", "ITX"];
 const ramOptions = ["8GB", "16GB", "32GB", "64GB"];
@@ -47,13 +47,13 @@ export default function Performance() {
 
   return (
     <section className="flex items-center justify-center min-h-screen pt-16">
-      <div className="relative items-center w-1/2 px-5 py-16 mx-auto md:px-12 lg:px-16 max-w-7xl bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
+      <div className="relative items-center sm:max-w-7xl mx-6 lg:mx-auto px-5 py-8 sm:py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
         <h1 className="text-3xl font-bold mb-6 text-white">
           Step 3: Performance and Components
         </h1>
 
         {/* Question 1: Prioritize Components */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="text-lg font-semibold mb-2 text-white">
             Which component would you like to prioritize the most?
           </h2>
@@ -72,7 +72,7 @@ export default function Performance() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Question 2: Storage Type */}
         <div className="mb-6">

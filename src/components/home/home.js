@@ -14,7 +14,7 @@ export default function Home() {
         <div className="flex w-full mx-auto text-left">
           <div className="relative inline-flex items-center mx-auto align-middle">
             <div className="text-center">
-              <h1 className="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-white md:text-5xl lg:text-6xl lg:max-w-7xl">
+              <h1 className="max-w-5xl text-4xl font-bold leading-none tracking-tighter text-white md:text-5xl lg:text-6xl lg:max-w-7xl">
                 Build Your Perfect PC <br className="hidden lg:block"></br>
                 Tailored Just for You!
               </h1>

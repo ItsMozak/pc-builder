@@ -41,7 +41,7 @@ export default function Usage() {
 
   return (
     <section className="flex items-center justify-center min-h-screen pt-16">
-      <div className="relative items-center w-1/2 max-w-7xl mx-auto px-5 py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
+      <div className="relative items-center sm:max-w-7xl mx-6 lg:mx-auto px-5 py-8 sm:py-16 md:px-12 lg:px-16 bg-black bg-opacity-60 backdrop-blur rounded-3xl border-2">
         <h1 className="text-3xl font-bold mb-6 text-white">Step 1: Usage</h1>
 
         {/* Question 1 */}

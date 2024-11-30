@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+
 import Navbar from "./components/navbar/navbar";
 import Home from "./components/home/home";
 import Usage from "./components/forms/usage";
 import Budget from "./components/forms/budget";
 import Performance from "./components/forms/performance";
 import Validate from "./components/forms/validate";
+import SpinnerOverlay from "./components/spinner/spinnerOverlay";
+import {LoadingProvider, useLoading} from "./interceptor/loadingContext";
 import { UsageProvider } from "./components/forms/usage-context";
 import "./App.css";
 import Result from "./components/forms/result";
+import { setupAxiosInterceptors } from "./interceptor/axiosConfig"; // Import Axios config
 
 function App() {
   return (
     <BrowserRouter basename="/pc-builder">
       <UsageProvider>
-        <Main />
+        <LoadingProvider>
+          <Main/>
+        </LoadingProvider>
       </UsageProvider>
     </BrowserRouter>
   );
@@ -22,7 +28,10 @@ function App() {
 
 function Main() {
   const location = useLocation();
+  const navigate = useNavigate(); // Hook for navigation
+
   const [animate, setAnimate] = useState(false);
+  const { isLoading, setIsLoading } = useLoading(); // Access loading state from context
 
   useEffect(() => {
     // Start the animation
@@ -36,8 +45,14 @@ function Main() {
     return () => clearTimeout(timer);
   }, [location]);
 
+  useEffect(() => {
+    // Set up Axios Interceptors
+    setupAxiosInterceptors(setIsLoading);
+  }, [setIsLoading]);
+
   return (
     <div className="App">
+      <SpinnerOverlay isLoading={isLoading} />
       <Navbar />
       <div className={animate ? "animate-fade" : ""}>
         <Routes location={location}>
