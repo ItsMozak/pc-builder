@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/navbar/navbar";
 import Home from "./components/home/home";
@@ -28,7 +28,6 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const navigate = useNavigate(); // Hook for navigation
 
   const [animate, setAnimate] = useState(false);
   const { isLoading, setIsLoading } = useLoading(); // Access loading state from context

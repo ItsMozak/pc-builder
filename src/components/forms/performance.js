@@ -21,7 +21,7 @@ export default function Performance() {
   const navigate = useNavigate();
   const {
     // priorities,
-    setPriorities,
+    // setPriorities,
     storageType,
     setStorageType,
     storageCapacity,
