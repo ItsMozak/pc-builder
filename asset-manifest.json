@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/pc-builder/static/css/main.68b50f7f.css",
-    "main.js": "/pc-builder/static/js/main.7edcc414.js",
+    "main.css": "/pc-builder/static/css/main.33aa10ee.css",
+    "main.js": "/pc-builder/static/js/main.b00db02c.js",
     "static/media/blue-background.png": "/pc-builder/static/media/blue-background.29a6b046ab767dc33fb7.png",
     "index.html": "/pc-builder/index.html",
-    "main.68b50f7f.css.map": "/pc-builder/static/css/main.68b50f7f.css.map",
-    "main.7edcc414.js.map": "/pc-builder/static/js/main.7edcc414.js.map"
+    "main.33aa10ee.css.map": "/pc-builder/static/css/main.33aa10ee.css.map",
+    "main.b00db02c.js.map": "/pc-builder/static/js/main.b00db02c.js.map"
   },
   "entrypoints": [
-    "static/css/main.68b50f7f.css",
-    "static/js/main.7edcc414.js"
+    "static/css/main.33aa10ee.css",
+    "static/js/main.b00db02c.js"
   ]
 }
